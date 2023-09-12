@@ -13,7 +13,7 @@ export function DogList() {
       .then((result) => { // then take the dog objects and run the setDogs function, passing the dog objects (result) as an argument to update the dogs variable
         setDogs(result); //the dogs variable now is updated to the list of dogs
       }); 
-      
+       
     }, []); //we pass no parameters because we just want this useEffect to mount once and give us the list of dogs from the API
   
     //return jsx to list the dogs
