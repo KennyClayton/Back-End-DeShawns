@@ -4,8 +4,10 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+
+// pages
 import Home from "./Home";
-import DogDetail from "./DogDetails";
+import { DogDetails } from "./DogDetails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,8 +15,9 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
+      {/*when user navs to the below path, it displays the DogDetails component*/}
+      <Route path="dogs/:id" element={<DogDetails />}></Route>
       </Route>
-      {/* <Route path="/dogs/{id}" element={<DogDetail />}></Route> */}
     </Routes>
   </BrowserRouter>,
 );

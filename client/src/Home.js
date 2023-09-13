@@ -1,10 +1,17 @@
+//^ The Home component will hold the jsx for rendering our text/headers and our list of dogs
+
 import React, { useEffect, useState } from "react";
 import { getDogs, getGreeting } from "./apiManager";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [greeting, setGreeting] = useState("Not Connected to the API");
   const [dogs, setDogs] = useState([]);
+  const [walkers, setWalkers] = useState([]);
 
+//^ The Home component will hold the jsx for rendering our text/headers and our list of dogs
+
+// The useEffect is for inital data load
   useEffect(() => {
     async function fetchData() {
       try {
@@ -13,6 +20,7 @@ export default function Home() {
 
         const dogResponse = await getDogs();
         setDogs(dogResponse);
+
       } catch (error) {
         console.log("API not connected", error);
       }
@@ -26,7 +34,9 @@ export default function Home() {
       <h1>{greeting}</h1>
       <ul>
         {dogs.map((dog, index) => (
-          <li key={index}>{dog.name}</li>
+          <ul key={index}>
+            <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
+          </ul>
         ))}
       </ul>
     </div>
@@ -34,23 +44,20 @@ export default function Home() {
 }
 
 // Old code below
-  //   getGreeting()
-  //     .then(setGreeting)
-  //     .catch(() => {
-  //       console.log("API not connected");
-  //     });
-  //    // Fetch list of dogs from your database
-  //    getDogs()
-  //    .then((response) => {
-  //     return response.json();
-  //    })
-  //    .then((result) => {
-  //      setDogs(result);
-  //    })
-  //    .catch(() => {
-  //      console.log("Error fetching dogs from the API");
-  //    });
-  // }, []);
-
-
-
+//   getGreeting()
+//     .then(setGreeting)
+//     .catch(() => {
+//       console.log("API not connected");
+//     });
+//    // Fetch list of dogs from your database
+//    getDogs()
+//    .then((response) => {
+//     return response.json();
+//    })
+//    .then((result) => {
+//      setDogs(result);
+//    })
+//    .catch(() => {
+//      console.log("Error fetching dogs from the API");
+//    });
+// }, []);

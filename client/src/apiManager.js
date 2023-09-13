@@ -1,14 +1,23 @@
+//^ apiManager will hold our fetch calls to the API. 
+  //getGreeting is fetching the data from the location "/api/hello" which is in the back end server (in Program.cs)
+
 export const getGreeting = async () => {
   const res = await fetch("/api/hello");
   return res.json();
 };
-
 
 //export a function that will get all dogs from the API
 export const getDogs = async () => {
   const res = await fetch("/api/dogs");  
   return res.json();
 };
+
+//export a function that will get dog details from the API
+export const getDogDetails = async () => {
+  const res = await fetch("/api/dogs");  
+  return res.json();
+};
+
 
 // //? So we still need an empty order builder object to catch the input from the user?
 // export const database = {

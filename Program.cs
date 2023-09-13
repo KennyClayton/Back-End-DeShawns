@@ -92,31 +92,38 @@ List<WalkerCity> walkerCities = new List<WalkerCity>
     {Id = 5, CityId = 2, WalkerId = 1} //walkercity 5 is a Denver-based walker named Fred
 };
 
+// this will handle GET requests to this endpoint. So when an HTTP GET request is sent from the client to this endpoint ON THE SERVER then the client will get this return
 app.MapGet("/api/hello", () =>
 {
-    return new { Message = "Welcome to DeShawn's Dog Walking" };
+    return new { Message = "Welcome to DeShawn's Dog Walking test"};
+    
 });
 
 //^ MapGet functions
+    //What does MapGet do? It "handles HTTP GET requests for specific routes".."This method is used to specify a route that should handle HTTP GET requests. It maps a URL path to a specific action or handler in your application."
 
 //^ Get a list of ALL dogs from the API database
-//^ENDPOINT TO GET ALL DOGS
+//^ ENDPOINT TO GET ALL DOGS
+// this responds to the HTTP request
 app.MapGet("/api/dogs", () =>
 {
-    return dogs;
+    return dogs; //this return runs when there is an http request for the endpoint /api/dogs
+});
+
+//get a dog by id using a route parameter 
+// handler
+app.MapGet("/api/dogs/{id}", (int id) => 
+{
+    //* Below in English: Dog type Dog instance will be assigned the result of a dogs list search for the first or default. So if "1" is passed as the id, then the FOD method on the dogs list will find the dogId number "1" and store that dog instance as a "Dog"
+    Dog dog = dogs.FirstOrDefault(d => d.Id == id); //get a dog
+    if (dog == null)
+    {
+        return Results.NotFound();
+    }
+    City city = cities.FirstOrDefault(c => c.Id == dog.CityId); //match the cityId to the Dog's cityId
+    dog.City = city;
+    dog.Walker = walkers.FirstOrDefault(w => w.Id == dog.WalkerId);
+    return Results.Ok(dog);
 });
 
 app.Run();
-
-//get a dog by id using a route parameter 
-// app.MapGet("/api/dog/{i}", (int id) => 
-// {
-//     //* Below in English: Dog type Dog instance will be assigned the result of a dogs list search for the first or default. So if "1" is passed as the id, then the FOD method on the dogs list will find the dogId number "1" and store that dog instance as a "Dog"
-//     Dog dog = dogs.FirstOrDefault(d => d.Id == id);
-//     if (dog == null)
-//     {
-//         return Results.NotFound();
-//     }
-//     return Results.Ok(dog);
-// });
-
