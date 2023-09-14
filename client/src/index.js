@@ -15,11 +15,11 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
-      {/*when user navs to the below path, it displays the DogDetails component*/}
-      <Route path="dogs/:id" element={<DogDetails />}></Route>
+        {/*when user navs to the below path, it displays the DogDetails component*/}
+        <Route path="dogs/:id" element={<DogDetails />}></Route>
       </Route>
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

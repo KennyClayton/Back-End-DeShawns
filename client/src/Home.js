@@ -36,9 +36,12 @@ export default function Home() {
         {dogs.map((dog, index) => (
           <ul key={index}>
             <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
-          </ul>
+          </ul>          
         ))}
       </ul>
+      <article>
+          <button id="addDogButton">Add Dog</button>
+      </article>
     </div>
   );
 }
